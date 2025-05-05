@@ -108,7 +108,27 @@
   programs.firefox.enable = true;
 
   # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+	  allowUnfree = true;
+	  nvidia.acceptLicense = true;
+  }; 
+
+  # Video Driver (nvidia)
+  services.xserver = {
+	  videoDrivers = [ "nvidia" ];  # This disables nouveau implicitly
+  };
+
+  hardware.nvidia = {
+	  modesetting.enable = true;
+	  powerManagement.enable = false;
+	  open = false;  # proprietary driver
+	  nvidiaSettings = true;
+	  package = config.boot.kernelPackages.nvidiaPackages.legacy_470; # For GT 710
+  };
+
+  boot.kernelParams = [ "nomodeset" "video=vesafb:off" ];
+  
+  boot.blacklistedKernelModules = [ "nouveau" ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -119,6 +139,7 @@
     i3lock
     xterm
     xclip
+    xorg.xmodmap
     kitty
     neofetch
     cmatrix
