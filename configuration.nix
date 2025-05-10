@@ -15,6 +15,14 @@
   boot.loader.grub.device = "/dev/sda";
   boot.loader.grub.useOSProber = true;
 
+  # External HDD
+  # 74cd382a-b81e-4315-9932-136d8542d163
+  fileSystems."/media/HDD" = {
+      device = "/dev/disk/by-uuid/74cd382a-b81e-4315-9932-136d8542d163"; 
+          fsType = "ext4";
+  };
+
+
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -133,6 +141,14 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    # android-studio
+    android-studio
+    openjdk17
+    android-tools
+    gradle    
+    jdk
+    
+    tmux
     i3
     dmenu
     i3status
@@ -148,12 +164,11 @@
     btop
     htop
     rofi
-    polybar
-    pavucontrol
     alsa-utils
     neovim
     nodejs_latest
     feh
+    ffmpeg
     cinnamon.nemo
     git
     cava
@@ -161,7 +176,12 @@
     google-chrome
     gcc
     python3
+    python3Packages.pip
+    python3Packages.tkinter
+    polybar
+    pavucontrol
     picom
+    pipes
     shutter
     spectacle
     wget
@@ -183,7 +203,7 @@
   # services.openssh.enable = true;
 
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
+  networking.firewall.allowedTCPPorts = [ 6969 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
