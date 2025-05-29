@@ -114,6 +114,7 @@
 
   # Install firefox.
   programs.firefox.enable = true;
+  programs.zsh.enable = true;
 
   # Allow unfree packages
   nixpkgs.config = {
@@ -143,20 +144,27 @@
   environment.systemPackages = with pkgs; [
     # android-studio
     android-studio
-    openjdk17
     android-tools
+    arduino-ide
+    appimage-run
+
+    blender
     gradle    
     jdk
     
     tmux
+    openjdk17
     i3
     dmenu
+    discord
     i3status
     i3lock
     xterm
     xclip
     xorg.xmodmap
+    xorg.xrandr
     kitty
+    kdenlive
     neofetch
     cmatrix
     clang
@@ -171,6 +179,7 @@
     ffmpeg
     cinnamon.nemo
     git
+    go
     cava
     vlc
     google-chrome
